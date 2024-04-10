@@ -7,6 +7,8 @@ import HeroSec from './components/HomeComp/HeroSec'
 import Mid from './components/HomeComp/Mid'
 import Card1 from './components/HomeComp/Card1'
 import Card2 from './components/HomeComp/Card2'
+import Card3 from './components/HomeComp/Card3'
+import Mid2 from './components/HomeComp/Mid2'
 
 function App() {
   
@@ -19,6 +21,8 @@ function App() {
       <Mid />
       <Card1/>
       <Card2/>
+      <Card3/>
+      <Mid2/>
     </>
   )
 }
