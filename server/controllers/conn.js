@@ -1,4 +1,4 @@
-const mongoose=require("mongoose")
+import mongoose from "mongoose"
 
 const connectDB= () =>{
     mongoose.connect(process.env.ATLAS_URI).then(data=>{
@@ -8,7 +8,5 @@ const connectDB= () =>{
         throw err;
     })
 }
-module.exports = {
-    connectDB
-};
 
+export default connectDB
