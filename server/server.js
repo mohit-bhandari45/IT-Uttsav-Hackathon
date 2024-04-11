@@ -1,8 +1,10 @@
 import express from "express"
 import cors from "cors"
-const app = express()
 import router from "./routes/router.js"
 import connectDB from "./controllers/conn.js"
+import 'dotenv/config'
+
+const app = express()
 connectDB()
 
 app.use(express.json())
