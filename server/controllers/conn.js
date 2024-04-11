@@ -1,12 +1,15 @@
 import mongoose from "mongoose"
 
 const connectDB= () =>{
-    mongoose.connect(process.env.ATLAS_URI).then(data=>{
-        console.log("connection to database successfull")
-    }).catch(err=>{
-        console.log("connection to database failed")
-        throw err;
-    })
+    try {
+        if(mongoose.connect(process.env.ATLAS_URI)){
+            console.log("Connection Successfull")
+        }else{
+            console.log("Database connection failed")
+        }
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 export default connectDB
