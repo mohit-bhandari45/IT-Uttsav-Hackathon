@@ -2,9 +2,9 @@ import React from 'react'
 
 const Card3 = () => {
     return (
-        <div className='flex gap-10 justify-start font-[Helvetica] relative pl-44 top-[-250px]'>
-            <div className="num bg-black w-[70px] h-[70px] rounded-full text-white flex justify-center items-center text-2xl">3</div>
-            <div className="second flex flex-col gap-6 pt-1">
+        <div className='flex gap-10 justify-start font-[Helvetica] pl-44 top-[-250px] relative h-[400px]'>
+            <div className="num bg-black w-[75px] h-[75px] rounded-full text-white flex justify-center items-center text-2xl relative z-10">3</div>
+            <div className="second flex flex-col gap-6 pt-2">
                 <div className="heading font-bold text-[40px]">Get Updates on where your waste goes </div>
                 <div className="body relative flex justify-center items-center">
                     <div className="image relative top-[100px]">
