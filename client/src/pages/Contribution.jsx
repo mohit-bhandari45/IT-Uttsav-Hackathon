@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import Navbar from '../components/UniversalComp/Navbar'
 import Footer from '../components/UniversalComp/Footer'
 import Body from '../components/ContributeComp/Body'
 
 
-const Contribution = () => {
+const Contribution = (props) => {
+
   return (
     <>
       <Navbar color="black" />
-      <Body/>
+      <Body email={props.email}/>
       <Footer />
     </>
   )

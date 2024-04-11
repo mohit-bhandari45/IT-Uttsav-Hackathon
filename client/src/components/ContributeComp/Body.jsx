@@ -1,6 +1,7 @@
 import React from 'react'
+import { useState } from 'react'
 
-const Body = () => {
+const Body = (props) => {
   return (
     <div className='h-[85vh] w-full flex justify-center items-center rounded-md font-[Helvetica] relative'>
       <div className="main h-[75vh] bg-[#37A896] w-[80%] flex justify-center items-center rounded-md relative">
@@ -53,7 +54,7 @@ const Body = () => {
                     <input className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Your Phone Number'/>
                   </div>
                   <div className="email">
-                    <input className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="email" name="" id="" placeholder='Your Email Address'/>
+                    <input value={props.email} className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="email" name="" id="" placeholder='Your Email Address'/>
                   </div>
                 </div>
 

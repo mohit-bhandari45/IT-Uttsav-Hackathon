@@ -1,6 +1,21 @@
 import React from 'react'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
-const HeroSec = () => {
+const HeroSec = (props) => {
+  const navigate=useNavigate()
+  const [email, setemail] = useState("")
+
+  const handleChange=(e)=>{
+    setemail(e.target.value)
+  }
+
+  const handleClick=() => {
+    props.setcon(false)
+    props.setemail(email)
+  }
+  
+
   return (
     <div className='main h-[85vh] w-full text-white relative z-20 flex'>
       <div className="left w-[65vw] flex flex-col gap-28 pl-24 justify-center h-[85vh]">
@@ -14,8 +29,8 @@ const HeroSec = () => {
           </div>
           <div className="points">
             <form className='flex gap-10' action="">
-              <input className='py-1 pl-3 pr-40 text-black rounded-md flex justify-center items-center' type="text" placeholder='examplemail@gmail.com' />
-              <input type="button" value="Next" className='bg-black px-10 py-2 rounded-md text-2xl' />
+              <input onChange={handleChange} className='py-1 pl-3 pr-40 text-black rounded-md flex justify-center items-center' type="email" value={email} placeholder='examplemail@gmail.com' />
+              <input onClick={handleClick} type="button" value="Next" className='bg-black px-10 py-2 cursor-pointer rounded-md text-2xl' />
             </form>
           </div>
         </div>

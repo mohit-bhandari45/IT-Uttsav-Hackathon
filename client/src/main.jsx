@@ -9,10 +9,6 @@ const router=createBrowserRouter([
   {
     path:"/",
     element:<App/>
-  },
-  {
-    path:"/contribute",
-    element:<Contribution/>
   }
 ])
 
