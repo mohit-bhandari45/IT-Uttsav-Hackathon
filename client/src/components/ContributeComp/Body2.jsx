@@ -12,6 +12,7 @@ const Body2 = (props) => {
     const [files, setfiles] = useState([])
 
     const handleclick = () => {
+        console.log(value)
         props.settrigger(3)
     }
 
@@ -21,11 +22,6 @@ const Body2 = (props) => {
     const handlechange2 = async (e) => {
         console.log(uploadApi)
         setfiles([...files, e.target.value])
-        let a=await fetch("http://localhost:8080/upload",{method:"POST",mode: "no-cors",headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          },body:JSON.parse(`"file":"${e.target.value}"`)})
-          console.log(await a.text())
         value.setdetails({ ...value.details, ["items"]: { ...value.details.items, [e.target.name]: [...files,files[files.length-1]] } })
     }
 
@@ -97,7 +93,7 @@ const Body2 = (props) => {
                                 <input onChange={handlechange2} name="file" className='cursor-pointer block w-full text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />
                             </div>
                         </div>
-                        <div className="buttonadd"><button className='text-white font-bold bg-[#37A896] rounded-md px-5 py-1 text-xl'>Add+</button></div>
+                        <div className="buttonadd"><button className='text-white font-bold bg-[#37A896] rounded-md px-5 py-1 text-xl'>Upload</button></div>
 
                         <div className="line w-[30vw] h-[2px] bg-[#DDE6E5]"></div>
                         <div className="button">
