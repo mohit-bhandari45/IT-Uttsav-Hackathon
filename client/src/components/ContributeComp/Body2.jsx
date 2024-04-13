@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
 import { DetailsContext } from '../../context/context'
+import { uploadApi } from '../../Apis/api'
 
 const Body2 = (props) => {
 
@@ -11,23 +12,20 @@ const Body2 = (props) => {
     const [files, setfiles] = useState([])
 
     const handleclick = () => {
-        console.log(files)
-        console.log(value)
-        console.log("vaorviopqwrvqwrb")
         props.settrigger(3)
     }
-
-
-    // C:\fakepath\recycle.png
-    // C:\fakepath\Screenshot_2024-04-07_090554-removebg-preview.png
-    // C:\fakepath\man-removebg-preview.png
-    // C:\fakepath\linkedIn_PNG39.webp
 
     const handlechange = (e) => {
         value.setdetails({ ...value.details, ["items"]: { ...value.details.items, [e.target.name]: e.target.value } })
     }
-    const handlechange2 = (e) => {
+    const handlechange2 = async (e) => {
+        console.log(uploadApi)
         setfiles([...files, e.target.value])
+        let a=await fetch("http://localhost:8080/upload",{method:"POST",mode: "no-cors",headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },body:JSON.parse(`"file":"${e.target.value}"`)})
+          console.log(await a.text())
         value.setdetails({ ...value.details, ["items"]: { ...value.details.items, [e.target.name]: [...files,files[files.length-1]] } })
     }
 

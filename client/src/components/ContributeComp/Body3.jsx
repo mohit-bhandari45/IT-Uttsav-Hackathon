@@ -1,26 +1,25 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { getLocation } from '../../Apis/api'
+import { locateInMap } from '../../functions/functions'
 
 const Body3 = (props) => {
     const [long, setLong] = useState()
     const [lat, setLat] = useState()
     const [address, setaddress] = useState("")
+    const [disabled, setdisabled] = useState(false)
 
-
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault()
         navigator.geolocation.getCurrentPosition(async (position) => {
-            setLong(position.coords.longitude)
-            setLat(position.coords.latitude)
+            setaddress(await locateInMap(position.coords.latitude, position.coords.longitude))
+            setdisabled(true)
+            document.querySelector(".map").innerHTML = `<iframe width="250px" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=150px&amp;hl=en&amp;q=${position.coords.latitude},${position.coords.longitude}+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe>`
         })
     }
 
     const handleClick2 = async (e) => {
         e.preventDefault()
-        let a = await fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${long}&apiKey=01684ca95f9345eca96d482708804522`)
-        let b = await a.json();
-        setaddress(b.features[0].properties.formatted)
+
     }
 
 
@@ -64,18 +63,19 @@ const Body3 = (props) => {
                 <div className="form w-[55%] h-full flex flex-col justify-center items-center">
                     <form action="" className='flex flex-col justify-center gap-4'>
 
-                        <div className="about flex flex-col gap-3">
-                            <div className="about1 text-xl">Select a pickup location</div>
+                        <div className="about flex flex-col gap-5">
+                            <div className="about1 text-2xl font-bold">Select a pickup location</div>
                             <div className="inputs flex flex-col gap-4">
-                                <input value={address} className='px-3 py-3 border-[2px] border-[#37A896] w-[525px] rounded-md' type="text" placeholder='Your Current Adddress' />
+                                {disabled ? <div><span className='mr-3 text-xl'>Your Address:-</span><input value={address} className='px-3 py-3 border-[2px] border-[#37A896] w-[400px] rounded-md' type="text" placeholder='Your Current Adddress' /></div> : ""}
                                 <div className="buttonadd flex gap-5">
                                     <button onClick={handleClick} className='text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Get Current Location</button>
-                                    <button onClick={handleClick2} className='text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Get Current address</button>
                                 </div>
                             </div>
                         </div>
 
-                        <div className='w-[300px]'><iframe width="250px" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=150px&amp;hl=en&amp;q=28.6542,77.2373+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe></div>
+                        <div className='w-[300px] map'>
+                            <iframe width="250px" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=150px&amp;hl=en&amp;q=${position.coords.latitude},${position.coords.longitude}+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe>
+                        </div>
 
 
                         <div className="line w-[30vw] h-[2px] bg-[#DDE6E5]"></div>

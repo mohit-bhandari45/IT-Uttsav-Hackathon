@@ -1,1 +1,2 @@
-export const getLocation="https://api.geoapify.com/v1/geocode/reverse?"
+const host="http://localhost:3000"
+export const uploadApi=`${host}/upload`
