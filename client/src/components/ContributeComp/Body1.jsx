@@ -1,21 +1,20 @@
 import React, { useContext } from 'react'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { DetailsContext } from '../../context/context'
 
 const Body1 = (props) => {
 
-  const value=useContext(DetailsContext) 
+  const value = useContext(DetailsContext)
 
   const handleChange = (e) => {
-    value.setdetails({...(value.details.personal),[e.target.name]:e.target.value})
+    value.setdetails({...value.details,["personal"]:{...value.details.personal,[e.target.name]:e.target.value}})
   }
 
-  const handleclick=(e) => {
+  const handleclick = (e) => {
     e.preventDefault()
-    console.log(value.details)
     props.settrigger(2)
   }
-  
+
   return (
     <div className='h-[85vh] w-full flex justify-center items-center rounded-md font-[Helvetica] relative'>
       <div className="main opacity-60 h-[75vh] bg-[#37A896] w-[80%] flex justify-center items-center rounded-md absolute">
@@ -66,7 +65,7 @@ const Body1 = (props) => {
               <div className="contact text-xl">Contact Details</div>
               <div className="num flex gap-4">
                 <div className="91 bg-[#ECFFFD] flex justify-center items-center px-4 rounded-xl text-xl">+91</div>
-                <input onChange={handleChange} name="number" className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Your Phone Number' />
+                <input onChange={handleChange} name="phone" className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Your Phone Number' />
               </div>
               <div className="email">
                 <input value={value.details.personal.email} className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="email" name="" id="" placeholder='Your Email Address' />
@@ -83,5 +82,4 @@ const Body1 = (props) => {
     </div>
   )
 }
-
 export default Body1

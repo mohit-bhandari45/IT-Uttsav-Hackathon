@@ -1,6 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { getLocation } from '../../Apis/api'
 
 const Body3 = (props) => {
+    const [long, setLong] = useState()
+    const [lat, setLat] = useState()
+    const [address, setaddress] = useState("")
+
+
+    const handleClick = (e) => {
+        e.preventDefault()
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            setLong(position.coords.longitude)
+            setLat(position.coords.latitude)
+        })
+    }
+
+    const handleClick2 = async (e) => {
+        e.preventDefault()
+        let a = await fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${long}&apiKey=01684ca95f9345eca96d482708804522`)
+        let b = await a.json();
+        setaddress(b.features[0].properties.formatted)
+    }
+
+
+
     return (
         <div className='h-[85vh] w-full flex justify-center items-center rounded-md font-[Helvetica] relative'>
             <div className="main opacity-60 h-[75vh] bg-[#37A896] w-[80%] flex justify-center items-center rounded-md absolute">
@@ -43,19 +67,20 @@ const Body3 = (props) => {
                         <div className="about flex flex-col gap-3">
                             <div className="about1 text-xl">Select a pickup location</div>
                             <div className="inputs flex flex-col gap-4">
-                                <input className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Items Present(General)' />
-                                <div className="buttonadd"><button className='text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Get Current Location</button></div>
+                                <input value={address} className='px-3 py-3 border-[2px] border-[#37A896] w-[525px] rounded-md' type="text" placeholder='Your Current Adddress' />
+                                <div className="buttonadd flex gap-5">
+                                    <button onClick={handleClick} className='text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Get Current Location</button>
+                                    <button onClick={handleClick2} className='text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Get Current address</button>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="image w-[330px] py-5 text-xl text-gray-400">
-                            <img className='w-[250px] h-[150px]' src="https://imgs.search.brave.com/utZe9vubUtiPLUqnJcK91yeEdg50i9vrZJKpilRXt4k/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTM5/MjM1NjM0NS9waG90/by9jaXR5LXN0cmVl/dC1tYXAuanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPVktQjNN/QkhVTXNtUDlKZk1z/eU5DQmp5U25rQnVJ/WXdmVHhIZW15VjZq/QzQ9" alt="" />
-                        </div>
-                        
+                        <div className='w-[300px]'><iframe width="250px" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=150px&amp;hl=en&amp;q=28.6542,77.2373+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe></div>
+
 
                         <div className="line w-[30vw] h-[2px] bg-[#DDE6E5]"></div>
                         <div className="button">
-                            <button onClick={()=>props.settrigger(4)} className='ml-[360px] text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Next</button>
+                            <button onClick={() => props.settrigger(4)} className='ml-[360px] text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Next</button>
                         </div>
                     </form>
                 </div>

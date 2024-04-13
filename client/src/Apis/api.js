@@ -1,0 +1,1 @@
+export const getLocation="https://api.geoapify.com/v1/geocode/reverse?"

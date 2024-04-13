@@ -8,31 +8,13 @@ const HeroSec = (props) => {
   const [emailmain, setemailmain] = useState("")
   const value = useContext(DetailsContext)
 
-  useEffect(() => {
-    //   console.log(value)
-    //   console.log(value.details)
-    //   console.log(value.details.personal)
-    //   console.log({...value.details.personal})
-    // const obj = { ...value.details }
-    // console.log(obj)
-  }, [first])
-
 
   const handleChange = (e) => {
-    const obj = { ...value.details }
-    // value.setdetails({ ...obj.personal, [e.target.name]: e.target.value })
-    setemailmain(e.target.value)
+    value.setdetails({...value.details,["personal"]:{...value.details.personal,[e.target.name]:e.target.value}})
   }
   
   const handleClick = () => {
     props.setcon(false)
-    // const obj = { ...value.details }
-    value.setdetails({ ...value.details.personal, ["email"]: emailmain })
-    // value.details.personal.email=emailmain
-    value.setdetails()
-    console.log(value.details)
-    console.log(value.details.personal)
-    console.log(value)
   }
 
   return (

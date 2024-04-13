@@ -20,8 +20,7 @@ function App() {
       "phone": "",
       "email": ""
   },
-  "items":
-      {
+  "items":{
           "name": "",
           "types": "",
           "file": []
