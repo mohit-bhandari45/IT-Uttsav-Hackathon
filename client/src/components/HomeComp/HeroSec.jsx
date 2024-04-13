@@ -1,20 +1,39 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { DetailsContext } from '../../context/context';
 
 const HeroSec = (props) => {
-  const navigate=useNavigate()
-  const [email, setemail] = useState("")
+  const [first, setfirst] = useState(0)
+  const [emailmain, setemailmain] = useState("")
+  const value = useContext(DetailsContext)
 
-  const handleChange=(e)=>{
-    setemail(e.target.value)
-  }
+  useEffect(() => {
+    //   console.log(value)
+    //   console.log(value.details)
+    //   console.log(value.details.personal)
+    //   console.log({...value.details.personal})
+    // const obj = { ...value.details }
+    // console.log(obj)
+  }, [first])
 
-  const handleClick=() => {
-    props.setcon(false)
-    props.setemail(email)
+
+  const handleChange = (e) => {
+    const obj = { ...value.details }
+    // value.setdetails({ ...obj.personal, [e.target.name]: e.target.value })
+    setemailmain(e.target.value)
   }
   
+  const handleClick = () => {
+    props.setcon(false)
+    // const obj = { ...value.details }
+    value.setdetails({ ...value.details.personal, ["email"]: emailmain })
+    // value.details.personal.email=emailmain
+    value.setdetails()
+    console.log(value.details)
+    console.log(value.details.personal)
+    console.log(value)
+  }
 
   return (
     <div className='main h-[85vh] w-full text-white relative z-20 flex'>
@@ -29,7 +48,7 @@ const HeroSec = (props) => {
           </div>
           <div className="points">
             <form className='flex gap-10' action="">
-              <input onChange={handleChange} className='py-1 pl-3 pr-40 text-black rounded-md flex justify-center items-center' type="email" value={email} placeholder='examplemail@gmail.com' />
+              <input name='email' onChange={handleChange} className='py-1 pl-3 pr-40 text-black rounded-md flex justify-center items-center' type="email" placeholder='examplemail@gmail.com' />
               <input onClick={handleClick} type="button" value="Next" className='bg-black px-10 py-2 cursor-pointer rounded-md text-2xl' />
             </form>
           </div>

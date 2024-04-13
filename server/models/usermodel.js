@@ -7,11 +7,11 @@ const UserModel = new mongoose.Schema({
         "phone": Number,
         "email": String
     },
-    "items": {
+    "items": [{
         "name": String,
         "types": String,
         "file": String
-    },
+    }],
     "location": {
         "coords": {
             "N": String,
@@ -19,7 +19,6 @@ const UserModel = new mongoose.Schema({
         },
         "address": String
     }
-
 });
 
 export const User = mongoose.model('User', UserModel);
