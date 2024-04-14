@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { useEffect } from 'react'
-import { locateInMap } from '../../functions/functions'
+import { locateInMap } from '../../utils/functions'
 
 const Body3 = (props) => {
     const [long, setLong] = useState()
@@ -16,12 +15,6 @@ const Body3 = (props) => {
             document.querySelector(".map").innerHTML = `<iframe width="250px" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=150px&amp;hl=en&amp;q=${position.coords.latitude},${position.coords.longitude}+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe>`
         })
     }
-
-    const handleClick2 = async (e) => {
-        e.preventDefault()
-
-    }
-
 
 
     return (
