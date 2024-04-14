@@ -30,29 +30,27 @@ function fileRename(oldFile){
 function saveDB(fileName, userData){
     const parsedData = JSON.parse(userData)
     console.log(fileName)
-    console.log(parsedData)
 }
 
 
 // Route for file upload
 app.post('/upload', (req, res) => {
-    if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No files were uploaded.');
-    }
+    const files = Object.values(req.files)[0];
+    const userData = req.body.userData;
 
-    const file = req.files.file;
-    const uploadPath = path.join(__dirname, 'store/', file.name);
+    files.forEach((file) => {
+        let uploadPath = path.join(__dirname, 'store/', file.name);
 
-    file.mv(uploadPath, (err) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Error uploading file.');
-        }
-        //File Upload Successful -> Now rename + Store
-        let newName = fileRename(file.name)
-        saveDB(newName, req.body.userData)
-
-        res.send('File uploaded successfully!');
+        file.mv(uploadPath, (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Error uploading file.');
+            }
+            //File Upload Successful -> Now rename + Store
+            let newName = fileRename(file.name)
+            //saving
+            saveDB(newName, userData);
+        });
     });
 });
 

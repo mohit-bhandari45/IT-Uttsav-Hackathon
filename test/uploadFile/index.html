@@ -6,37 +6,36 @@
 <title>File Upload</title>
 </head>
 <body>
-    <input type="file" id="fileInput">
+    <input type="file" class="files"/>
+    <input type="file" class="files"/>
     <button onclick="uploadFile()">Upload</button>
 
     <script>
-        function uploadFile() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-            
-            if (!file) {
-                alert('Please select a file.');
-                return;
-            }
-            
-            const formData = new FormData();
+        async function uploadFile() {
+            const fileInputs = document.getElementsByClassName('files')
+
+            const formData = new FormData()
             const userData = JSON.stringify({
                 'name': "Someone"
             })
 
-            formData.append('file', file);
+            for (let fileInput of fileInputs) {
+                const file = fileInput.files[0];
+                formData.append('files', file);
+            }
             formData.append('userData', userData)
-            
-            
-            fetch('http://localhost:3000/upload', {
+        
+            fetch('http://localhost:3000/upload/', {
                 mode: 'cors',
                 method: 'POST',
                 body: formData
             }).then(res=>{
                 console.log(res)
+            }).catch(err=>{
+                console.log(err)
             })
             
-            
+            console.log("over")
         }
     </script>
 
