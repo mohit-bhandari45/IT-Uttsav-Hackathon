@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { useState, useEffect } from 'react'
 import { DetailsContext } from '../../context/context'
 import { uploadApi } from '../../Apis/api'
+import axios from 'axios'
 
 const Body2 = (props) => {
 
@@ -10,19 +11,62 @@ const Body2 = (props) => {
     const [height2, setheight2] = useState(73)
     const [height3, setheight3] = useState(70)
     const [files, setfiles] = useState([])
+    const [fileImages, setfileImages] = useState([])
+    const ref = useRef()
 
-    const handleclick = () => {
-        console.log(value)
+
+    const handleclick = async (e) => {
+        e.preventDefault();
+        // // console.log(fileImages)
+        // const formData = new FormData();
+        // // for (let fileInput of fileImages) {
+        //     formData.append('files', fileImages);
+        // // }
+        // // for (let i = 0; i < fileImages.length; i++) {
+        // //     console.log(fileImages[i])
+        // //     formData.append('files', fileImages[i]);
+        // // }
+        // // console.log(formData)
+        // let a = await fetch(uploadApi, {
+        //     method: 'POST',
+        //     body:formData
+        // })
+        // console.log(await a.text());
+        const formData = new FormData();
+        const fileInputs = document.getElementsByClassName('files')
+        const userData = JSON.stringify({
+            'name': "Someone"
+        })
+
+        for (let fileInput of fileInputs) {
+            const file = fileInput.files[0];
+            // console.log(file)
+            formData.append('files', file);
+        }
+        // console.log(formData)
+        formData.append('userData', userData)
+
+        await fetch('http://localhost:8080/user/contribute', {
+            method: 'POST',
+            body: formData
+        }).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log("the error is:"+err)
+        })
+
+        console.log("over")
         props.settrigger(3)
     }
 
     const handlechange = (e) => {
         value.setdetails({ ...value.details, ["items"]: { ...value.details.items, [e.target.name]: e.target.value } })
     }
+
     const handlechange2 = async (e) => {
-        console.log(uploadApi)
-        setfiles([...files, e.target.value])
-        value.setdetails({ ...value.details, ["items"]: { ...value.details.items, [e.target.name]: [...files,files[files.length-1]] } })
+        setfileImages(e.target.files[0])
+        // setfiles([...files, e.target.value])
+        // console.log(fileImages[0])
     }
 
     useEffect(() => {
@@ -90,7 +134,8 @@ const Body2 = (props) => {
 
                         <div className="image w-[330px] py-2 border-dashed border-[2px] border-[#37A896] rounded-md text-xl px-3 text-gray-400">
                             <div className="heading">
-                                <input onChange={handlechange2} name="file" className='cursor-pointer block w-full text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />
+                                <input name="file" className='files cursor-pointer block w-full text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />
+                                <input name="file" className='files cursor-pointer block w-full text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />
                             </div>
                         </div>
                         <div className="buttonadd"><button className='text-white font-bold bg-[#37A896] rounded-md px-5 py-1 text-xl'>Upload</button></div>

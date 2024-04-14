@@ -4,11 +4,10 @@ import { findOrg,orgRegister } from "../controllers/organisation.js";
 
 const router = express.Router();
 
-router.post(`/user/contribute/`, userContribute)
-router.post(`/user/ticket/`, userTicket)
+router.post(`/user/contribute`, userContribute)
+router.post(`/user/ticket`, userTicket)
 
-router.get("/org/fetch/", findOrg)
-router.post("/org/register/", orgRegister)
-
+router.get("/org/fetch", findOrg)
+router.post("/org/register", orgRegister)
 
 export default router
