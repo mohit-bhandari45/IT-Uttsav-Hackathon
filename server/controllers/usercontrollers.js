@@ -4,8 +4,9 @@ import { Ticket } from "../models/ticketmodel.js"
 import path from "path"
 import fs from "fs"
 
-function fileRename(oldFile){
-    const files = fs.readdirSync('store/').length;
+function fileRename(oldFile) {
+    const files = fs.readdirSync('E:/IT-Uttsav-Hackathon/server/store').length;
+    console.log(files)
     const fileExt = oldFile.split('.')[1]
 
     let oldFileName = `store/${oldFile}`
@@ -13,7 +14,7 @@ function fileRename(oldFile){
     fs.rename(oldFileName, newFileName, (err) => {
         if (err) {
             throw err;
-        } 
+        }
     });
     return newFileName
 }

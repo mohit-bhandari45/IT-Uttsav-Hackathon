@@ -27,7 +27,7 @@ function App() {
       },
   "location": {
       "coords": {
-          "N": "",
+          // "N": "",
           "E": ""
       },
       "address": ""
