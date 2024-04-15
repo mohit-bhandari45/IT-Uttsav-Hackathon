@@ -15,46 +15,18 @@ const Body2 = (props) => {
     const ref = useRef()
 
 
+
     const handleclick = async (e) => {
         e.preventDefault();
-        // // console.log(fileImages)
-        // const formData = new FormData();
-        // // for (let fileInput of fileImages) {
-        //     formData.append('files', fileImages);
-        // // }
-        // // for (let i = 0; i < fileImages.length; i++) {
-        // //     console.log(fileImages[i])
-        // //     formData.append('files', fileImages[i]);
-        // // }
-        // // console.log(formData)
-        // let a = await fetch(uploadApi, {
-        //     method: 'POST',
-        //     body:formData
-        // })
-        // console.log(await a.text());
         const formData = new FormData();
-        const fileInputs = document.getElementsByClassName('files')
-        const userData = JSON.stringify({
-            'name': "Someone"
-        })
-
-        for (let fileInput of fileInputs) {
-            const file = fileInput.files[0];
-            // console.log(file)
-            formData.append('files', file);
+        for (let fileInput of fileImages) {
+            formData.append('files', fileInput);
         }
-        // console.log(formData)
-        formData.append('userData', userData)
-
-        await fetch('http://localhost:8080/user/contribute', {
+        let a = await fetch(uploadApi, {
             method: 'POST',
-            body: formData
-        }).then(res => {
-            console.log(res)
-        }).catch(err => {
-            console.log("the error is:"+err)
+            body:formData
         })
-
+        console.log(await a.text());
         console.log("over")
         props.settrigger(3)
     }
@@ -64,9 +36,8 @@ const Body2 = (props) => {
     }
 
     const handlechange2 = async (e) => {
-        setfileImages(e.target.files[0])
-        // setfiles([...files, e.target.value])
-        // console.log(fileImages[0])
+        setfileImages([...fileImages,e.target.files[0]])
+        setfiles([...files, e.target.value])
     }
 
     useEffect(() => {
@@ -74,7 +45,6 @@ const Body2 = (props) => {
         setheight2(height2 + 2)
         setheight3(height3 + 2)
     }, [files])
-
 
 
     return (
@@ -119,9 +89,10 @@ const Body2 = (props) => {
                         <div className="about flex flex-col gap-3">
                             <div className="about1 text-xl">Wastes to Add(Optional)</div>
                             <div className="inputs flex flex-col gap-4">
-                                <input name="name" onChange={handlechange} className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Items Present(General)' />
-                                <input name="types" onChange={handlechange} className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Type of items' />
+                                 <input name="name" onChange={handlechange} className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Items Present(General)' />
+                                <input name="types" onChange={handlechange} className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Type of items' /> 
                             </div>
+                        
                         </div>
 
                         <div className='images'>
@@ -134,9 +105,7 @@ const Body2 = (props) => {
 
                         <div className="image w-[330px] py-2 border-dashed border-[2px] border-[#37A896] rounded-md text-xl px-3 text-gray-400">
                             <div className="heading">
-                                <input name="file" className='files cursor-pointer block w-full text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />
-                                <input name="file" className='files cursor-pointer block w-full text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />
-                            </div>
+                                <input onChange={handlechange2} name="file" className='files cursor-pointer block w-full text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />                            </div>
                         </div>
                         <div className="buttonadd"><button className='text-white font-bold bg-[#37A896] rounded-md px-5 py-1 text-xl'>Upload</button></div>
 
