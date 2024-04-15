@@ -16,18 +16,12 @@
         async function uploadFile() {
             const formData = new FormData();
             const fileInputs = document.getElementsByClassName('files')
-            // console.log(fileInputs)
-            const userData = JSON.stringify({
-                'name': "Someone"
-            })
 
             for (let fileInput of fileInputs) {
                 const file = fileInput.files[0];
-                console.log(file)
                 formData.append('files', file);
             }
-            console.log(formData)
-            formData.append('userData', userData)
+        
 
             await fetch('http://localhost:3000/upload/', {
                 mode: 'cors',

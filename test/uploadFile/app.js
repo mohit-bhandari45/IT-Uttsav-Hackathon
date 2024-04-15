@@ -12,43 +12,45 @@ app.use(fileUpload());
 app.use(express.json())
 
 
-function fileRename(oldFile){
-    const files = fs.readdirSync('store/').length;
+async function fileRename(oldFile, index){
     const fileExt = oldFile.split('.')[1]
-
     let oldFileName = `store/${oldFile}`
-    let newFileName = `store/${files}.${fileExt}`
-    fs.rename(oldFileName, newFileName, (err) => {
-        if (err) {
+    let newFileName = `store/${index}.${fileExt}`
+    await fs.rename(oldFileName, newFileName, (err) => {
+        if (err) 
             throw err;
-        } 
     });
     return newFileName
 }
 
+async function fileMove(file, uploadPath){
+    await file.mv(uploadPath, (err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error uploading file.');
+        }
+    });
+    //console.log("moved")
+}
 
 
 
 // Route for file upload
 app.post('/upload', (req, res) => {
-    console.log(req)
     const files = Object.values(req.files)[0];
-    console.log(files)
-    const fileName_response = []
-
+    //var fileCount = fs.readdirSync('store/').length || 0;
     files.forEach((file) => {
         let uploadPath = path.join(__dirname, 'store/', file.name);
-        file.mv(uploadPath, (err) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).send('Error uploading file.');
-            }
-            //File Upload Successful -> Now rename + Store
-            let newName = fileRename(file.name)
-            fileName_response.push(newName)
-        });
+        var fileName = file.name
+        fileMove(file, uploadPath).then(()=>{
+            //console.log(fileName)
+            //fileName_response.push(fileName)
+        })   
+        //fileCount++;
     });
-    //send file name as response
+    res.json({
+        "success": true
+    })
 });
 
 
