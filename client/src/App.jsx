@@ -19,24 +19,24 @@ function App() {
       "lname": "",
       "phone": "",
       "email": ""
-  },
-  "items":{
-          "name": "",
-          "types": "",
-          "file": []
-      },
-  "location": {
+    },
+    "items": {
+      "name": "",
+      "types": "",
+      "file": []
+    },
+    "location": {
       "coords": {
-          // "N": "",
-          "E": ""
+        "N": "",
+        "E": ""
       },
       "address": ""
-  }
+    }
   })
-  
+
   return (
     <>
-      <DetailsContext.Provider value={{details,setdetails}}>
+      <DetailsContext.Provider value={{ details, setdetails }}>
         {con ? <div><img className='w-full h-[100vh] absolute opacity-100' src="src/assets/image.png" alt="" />
           <div className='w-full h-[100vh] absolute z-10 opacity-80 bg-black'></div>
           <Navbar color="none" />

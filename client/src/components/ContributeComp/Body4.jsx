@@ -1,6 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { uploadApi } from '../../Apis/api'
 
 const Body4 = () => {
+    
+
+    const [data, setData] = useState(
+        {
+            "personal": {
+                "uname": "John Smith",
+                "phone": 9134382123,
+                "email": "mohitbhandari941@gmail.com"
+            },
+            "items": [
+                {
+                    "name": "Groceries Waste",
+                    "types": "wet",
+                    "file": ["C://fakepath//black-removebg-preview.png", "C://fakepath//black.png", "C://fakepath//man-removebg-preview.png"]
+                },
+            ],
+            "location": {
+                "coords": {
+                    "N": "20.3423535",
+                    "E": "42.84785"
+                },
+                "address": "Prem Nagar Dehradun"
+            }
+        }
+    )
+
+
+    const handleClick = async (e) => {
+        e.preventDefault()
+        let a = await fetch(uploadApi, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(data)
+        })
+        console.log(await a.text());
+    }
+
+
     return (
         <div className='h-[85vh] w-full flex justify-center items-center rounded-md font-[Helvetica] relative'>
             <div className="main opacity-60 h-[75vh] bg-[#37A896] w-[80%] flex justify-center items-center rounded-md absolute">
@@ -51,7 +93,7 @@ const Body4 = () => {
                         <div className="lines">
                             <div className="line w-[30vw] h-[2px] bg-[#DDE6E5]"></div>
                             <div className="button">
-                                <button className='ml-[360px] text-white my-4 font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Next</button>
+                                <button onClick={handleClick} className='ml-[360px] text-white my-4 font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Next</button>
                             </div>
                         </div>
                     </form>

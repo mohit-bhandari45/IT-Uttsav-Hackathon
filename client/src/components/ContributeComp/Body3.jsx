@@ -13,13 +13,17 @@ const Body3 = (props) => {
 
     useEffect(() => {
         if (coordbool) {
-            // value.setdetails({ ...value.details, ["location"]: { ...value.details.location, ["coords"]: { ...value.details.location.coords, "N" : "rohit"} } })
-            // value.setdetails({ ...value.details, location: { ...value.details.location, coords: { ...value.details.location.coords, E: "mohit" } } })
-            value.setdetails({ ...value.details, ["items"]: { ...value.details.items, "E": "MOHIT" } })
-            console.log(value.details)
+
+            // localStorage.setItem("lat",lat)
+            // localStorage.setItem("long",long)
+            // localStorage.setItem("address",address)
+            /*Not Working*/
+            // value.setdetails({ ...value.details, ["location"]: { ...value.details.location, ["coords"]:{...value.details.location.coords,[a]:lat } }})
+            // console.log("Updated address")
+            // console.log(value.details)
+            // console.log(value.details.location.coords)
         }
     }, [coordbool])
-
 
     const handleClick = async (e) => {
         e.preventDefault()
@@ -29,13 +33,15 @@ const Body3 = (props) => {
             setaddress(await locateInMap(position.coords.latitude, position.coords.longitude))
             setdisabled(true)
             document.querySelector(".map").innerHTML = `<iframe width="250px" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=150px&amp;hl=en&amp;q=${position.coords.latitude},${position.coords.longitude}+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe>`
-            
-
-            // setOuterObject({...prevState,innerObject: {...prevState.innerObject,deepObject: {...prevState.innerObject.deepObject,property: 'newValue'
             setcoordbool(true)
         })
     }
 
+    /*Not Working*/
+    // const handleChange=(e) => {
+    //     value.setdetails({ ...value.details, ["location"]: { ...value.details.location, ["coords"]:{...value.details.location.coords,[e.target.name]:e.target.value } }})
+    // }
+    
 
     return (
         <div className='h-[85vh] w-full flex justify-center items-center rounded-md font-[Helvetica] relative'>
@@ -43,6 +49,11 @@ const Body3 = (props) => {
                 <div className="secmain opacity-90 h-[73vh] w-[99%] bg-[#71b7ac] flex justify-center items-center rounded-md absolute">
                 </div>
             </div>
+
+            {/* Not Working */}
+            {/* <input name='E' className='bg-black text-white' onChange={handleChange} type="text"/>
+            <input name='F' className='bg-black text-white' onChange={handleChange} type="text"/> */}
+            
             <div className="card h-[71vh] w-[78%] bg-[#ffffff] rounded-md flex justify-center items-center relative">
                 <div className="left h-[65vh]  gap-14 w-[40%] bg-[#ECFFFD] flex flex-col justify-center items-start px-10">
                     <div className="title text-3xl font-bold pl-2">

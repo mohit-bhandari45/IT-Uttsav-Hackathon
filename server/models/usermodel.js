@@ -10,7 +10,7 @@ const UserModel = new mongoose.Schema({
     "items": [{
         "name": String,
         "types": String,
-        "file": String
+        "file": []
     }],
     "location": {
         "coords": {
