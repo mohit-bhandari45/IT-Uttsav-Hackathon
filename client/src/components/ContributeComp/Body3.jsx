@@ -10,21 +10,29 @@ const Body3 = (props) => {
     const [disabled, setdisabled] = useState(false)
     const value = useContext(DetailsContext)
     const [coordbool, setcoordbool] = useState(false)
+    const [coordbool2, setcoordbool2] = useState(false)
+    const [coordbool3, setcoordbool3] = useState(false)
+
+    //rest states
+    // const [coords, setcoords] = useState({})
+    // const [addressmain, setadressmain] = useState()
+    const [main, setmain] = useState({
+        "coords": {
+            "N": "20.3423535",
+            "E": "42.84785"
+        },
+        "address": "Khairigaon,Prem Nagar Dehradun"
+    });
 
     useEffect(() => {
         if (coordbool) {
-            localStorage.setItem("lat",lat)
-            localStorage.setItem("long",long)
-            localStorage.setItem("address",address)
-            console.log(localStorage.getItem("lat"))
-            console.log(localStorage.getItem("long"))
-            console.log(localStorage.getItem("address"))
-            
-            /*Not Working*/
-            // value.setdetails({ ...value.details, ["location"]: { ...value.details.location, ["coords"]:{...value.details.location.coords,[a]:lat } }})
-            // console.log("Updated address")
-            // console.log(value.details)
-            // console.log(value.details.location.coords)
+            // console.log("coord is true")
+            // setcoords({"N":lat,"E":long})
+            // setadressmain({"address":address})
+            // setmain({...coords,...addressmain})
+            value.setdetails({ ...value.details, ["location"]: main })
+            console.log(value.details)
+            // setcoordbool2(true)
         }
     }, [coordbool])
 
@@ -33,18 +41,21 @@ const Body3 = (props) => {
         navigator.geolocation.getCurrentPosition(async (position) => {
             setLong(position.coords.longitude)
             setLat(position.coords.latitude)
-            setaddress(await locateInMap(position.coords.latitude, position.coords.longitude))
+            setaddress("Kharigaon,Premnagar")
             setdisabled(true)
             document.querySelector(".map").innerHTML = `<iframe width="250px" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=150px&amp;hl=en&amp;q=${position.coords.latitude},${position.coords.longitude}+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe>`
             setcoordbool(true)
         })
     }
 
-    /*Not Working*/
-    // const handleChange=(e) => {
-    //     value.setdetails({ ...value.details, ["location"]: { ...value.details.location, ["coords"]:{...value.details.location.coords,[e.target.name]:e.target.value } }})
-    // }
-    
+    const handleClickMain = (e) => {
+        e.preventDefault()
+        // setTimeout((e) => {
+            // console.log(value.details)
+            props.settrigger(4)
+        // }, 1000);
+    }
+
 
     return (
         <div className='h-[85vh] w-full flex justify-center items-center rounded-md font-[Helvetica] relative'>
@@ -56,33 +67,33 @@ const Body3 = (props) => {
             {/* Not Working */}
             {/* <input name='E' className='bg-black text-white' onChange={handleChange} type="text"/>
             <input name='F' className='bg-black text-white' onChange={handleChange} type="text"/> */}
-            
+
             <div className="card h-[71vh] w-[78%] bg-[#ffffff] rounded-md flex justify-center items-center relative">
                 <div className="left h-[65vh]  gap-14 w-[40%] bg-[#ECFFFD] flex flex-col justify-center items-start px-10">
-                    <div className="title text-3xl font-bold pl-2">
+                    <div className="title text-3xl font-bold pl-2 animate__animated animate__slideInLeft animate__fadeIn">
                         Contribute
                     </div>
                     <div className="sec1 flex justify-center items-center gap-5">
-                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full">1</div>
-                        <div className="para w-[200px] text-xl">Personal Details</div>
-                        <div className="line absolute top-[180px] w-[4px] h-[40px] left-[88px] bg-[#DDE6E5]"></div>
+                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full animate__animated animate__fadeIn">1</div>
+                        <div className="para w-[200px] text-xl animate__animated animate__slideInLeft animate__fadeIn">Personal Details</div>
+                        <div className="line absolute top-[180px] w-[4px] h-[40px] left-[88px] bg-[#DDE6E5] animate__animated animate__fadeIn"></div>
                     </div>
 
                     <div className="sec2 flex justify-center items-center gap-5">
-                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full">2</div>
-                        <div className="para w-[200px] text-xl">Items List</div>
-                        <div className="line absolute top-[276px] w-[4px] h-[40px] left-[88px] bg-[#DDE6E5]"></div>
+                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full animate__animated animate__fadeIn">2</div>
+                        <div className="para w-[200px] text-xl animate__animated animate__slideInLeft animate__fadeIn">Items List</div>
+                        <div className="line absolute top-[276px] w-[4px] h-[40px] left-[88px] bg-[#DDE6E5] animate__animated animate__fadeIn"></div>
                     </div>
 
                     <div className="sec3 flex justify-center items-center gap-5">
-                        <div className="flex justify-center items-center font-bold num bg-[#37A896] p-2 w-[18%] rounded-full text-white">3</div>
-                        <div className="para w-[200px] text-xl">Pickup Location</div>
-                        <div className="line absolute top-[374px] w-[4px] h-[40px] left-[88px] bg-[#37A896]"></div>
+                        <div className="flex justify-center items-center font-bold num bg-[#37A896] p-2 w-[18%] rounded-full text-white animate__animated animate__fadeIn">3</div>
+                        <div className="para w-[200px] text-xl animate__animated animate__slideInLeft animate__fadeIn">Pickup Location</div>
+                        <div className="line absolute top-[374px] w-[4px] h-[40px] left-[88px] bg-[#37A896] animate__animated animate__fadeIn"></div>
                     </div>
 
                     <div className="sec3 flex justify-center items-center gap-5">
-                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full ">4</div>
-                        <div className="para w-[200px] text-xl">Complete</div>
+                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full animate__animated animate__fadeIn">4</div>
+                        <div className="para w-[200px] text-xl animate__animated animate__slideInLeft animate__fadeIn">Complete</div>
                     </div>
 
                 </div>
@@ -91,11 +102,11 @@ const Body3 = (props) => {
                     <form action="" className='flex flex-col justify-center gap-4'>
 
                         <div className="about flex flex-col gap-5">
-                            <div className="about1 text-2xl font-bold">Select a pickup location</div>
+                            <div className="about1 text-2xl font-bold animate__animated animate__slideInUp animate__fadeIn">Select a pickup location</div>
                             <div className="inputs flex flex-col gap-4">
                                 {disabled ? <div><span className='mr-3 text-xl'>Your Address:-</span><input value={address} className='px-3 py-3 border-[2px] border-[#37A896] w-[400px] rounded-md' type="text" placeholder='Your Current Adddress' /></div> : ""}
                                 <div className="buttonadd flex gap-5">
-                                    <button onClick={handleClick} className='text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Get Current Location</button>
+                                    <button onClick={handleClick} className='text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl animate__animated animate__slideInUp animate__fadeIn'>Get Current Location</button>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +118,7 @@ const Body3 = (props) => {
 
                         <div className="line w-[30vw] h-[2px] bg-[#DDE6E5]"></div>
                         <div className="button">
-                            <button onClick={() => props.settrigger(4)} className='ml-[360px] text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Next</button>
+                            <button onClick={handleClickMain} className='ml-[360px] text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl animate__animated animate__slideInUp animate__fadeIn'>Next</button>
                         </div>
                     </form>
                 </div>

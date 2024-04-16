@@ -2,15 +2,32 @@ import mongoose from "mongoose"
 import { User } from "../models/usermodel.js"
 import { Ticket } from "../models/ticketmodel.js"
 import path from "path"
-import fs from "fs"
 import nodemailer from "nodemailer"
-import { Console } from "console"
+
+export const uploadFile=(req,res)=>{
+    /*File Functions*/
+    const files = Object.values(req.files)[0];
+    files.forEach((file) => {
+        let uploadPath = path.join("E:/IT-Uttsav-Hackathon/server", 'store/', file.name);
+        file.mv(uploadPath, (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Error uploading file.');
+            }
+        });
+    });
+    res.send("Completed the user upload")
+}
 
 export const userContribute = async (req, res) => {
+    
     try {
-
         console.log(req.body)
-        /* email functions */   
+        /* email functions */
+        
+        //save to db
+        User.create(req.body)
+        
         const email = req.body.personal.email
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -30,22 +47,34 @@ export const userContribute = async (req, res) => {
             to: email,
             subject: "Regarding Registration",
             html: `
-            <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-collapse: collapse;">
-            <tr>
-            <td align="center" valign="top" style="padding: 20px;">
-            <h1>Welcome to Our Website!</h1>
-            </td>
-            </tr>
-            <tr>
-            <td align="left" valign="top" style="padding: 20px;">
-            <p>Hello ${req.body.personal.uname},</p>
-            <p>We're thrilled to have you as a new member of our community!</p>
-            <p>With your new account, you now have access to exclusive features and content.</p>
-            <p>If you have any questions or need assistance, feel free to reach out to us.</p>
-            <p>Best regards,<br> EcoHaul</p>
-            </td>
-            </tr>
-            </table>
+            <div class="container" style="width: 90vw; margin: auto; font-family: Arial, Helvetica, sans-serif;">
+            <div class="from" >From : <span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span></div>
+            <div  class="content">
+            <h1 style="text-align: center;">Thank You For your contribution</h1>
+            <div class="overview">
+                <div>Hey ${req.body.personal.fname}<span style="margin: 0px 2px;"></span>${req.body.personal.lname}</div>
+                <div>On behalf of the entire team at <span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span>, I want to extend a warm welcome to you! We're thrilled to have you as a new contributor of our community.</div>
+                <div>Thank you for choosing <span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span> for contributing to the great cause. We're committed to providing you with an exceptional experience.</div>
+                <div>As a contributor of Ecohaul, you now contribute by giving variety of waste products.</div>
+            </div>
+            <div class="details" style="margin: 20px 0px;">
+                <div style="font-weight: 600; font-size: large; margin-bottom: 10px;">Details</div>
+                <div style="font-weight: 600;">Your Item Details:-</div>
+                <div class="items" >
+                    <div>Item name<span style="margin: 0px 2px;"></span>:<span style="margin: 0px 2px;"></span>${req.body.items.name}</div>
+                    <div>Item Type<span style="margin: 0px 2px;"></span>:<span style="margin: 0px 2px;"></span>${req.body.items.types}</div>
+                </div>
+                <div style="font-weight: 600; margin-top: 10px;">Your Address:-</div>
+                <div>${req.body.location.address}</div>
+            </div>
+            <div style="margin-top: 30px; margin-bottom: 3px;">Reach out to....</div>
+            <div>For more info <a href="https://www.youtube.com/">Click Here</a></div>
+            <div class="foot" style="margin: 30px 0px;">
+                <div>Best Regards</div>
+                <div style="font-weight: 600"><span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span></div>
+            </div>
+        </div>
+    </div>
             `,
             // attachments: [
             //     {
@@ -69,20 +98,7 @@ export const userContribute = async (req, res) => {
             }
         }
         sendMail(transporter, mailOptions)
-
-
-        /*File Functions*/
-        // const files = Object.values(req.files)[0];
-        // files.forEach((file) => {
-        //     let uploadPath = path.join("E:/IT-Uttsav-Hackathon/server", 'store/', file.name);
-        //     file.mv(uploadPath, (err) => {
-        //         if (err) {
-        //             console.error(err);
-        //             return res.status(500).send('Error uploading file.');
-        //         }
-        //     });
-        // });
-        res.send("Completed user")
+        res.send("Completed user Registration")
     } catch (error) {
         console.log(error)
     }

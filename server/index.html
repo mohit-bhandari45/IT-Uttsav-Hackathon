@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="container" style="width: 90vw; margin: auto; font-family: Arial, Helvetica, sans-serif;">
+        <div class="from" >From : <span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span></div>
+        <div  class="content">
+        <h1 style="text-align: center;">Thank You For your contribution</h1>
+        <div class="overview">
+            <div>Hey ${req.body.personal.fname}<span style="margin: 0px 2px;"></span>${req.body.personal.lname}</div>
+            <div>On behalf of the entire team at <span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span>, I want to extend a warm welcome to you! We're thrilled to have you as a new contributor of our community.</div>
+            <div>Thank you for choosing <span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span> for contributing to the great cause. We're committed to providing you with an exceptional experience.</div>
+            <div>As a contributor of Ecohaul, you now contribute by giving variety of waste products.</div>
+        </div>
+        <div class="details" style="margin: 20px 0px;">
+            <div style="font-weight: 600; font-size: large; margin-bottom: 10px;">Details</div>
+            <div style="font-weight: 600;">Your Item Details:-</div>
+            <div class="items" >
+                <div>Item name<span style="margin: 0px 2px;"></span>:<span style="margin: 0px 2px;"></span>${req.body.items.name}</div>
+                <div>Item Type<span style="margin: 0px 2px;"></span>:<span style="margin: 0px 2px;"></span>${req.body.items.types}</div>
+            </div>
+            <div style="font-weight: 600; margin-top: 10px;">Your Address:-</div>
+            <div>${req.body.location.address}</div>
+        </div>
+        <div style="margin-top: 30px; margin-bottom: 3px;">Reach out to....</div>
+        <div>For more info <a href="https://www.youtube.com/">Click Here</a></div>
+        <div class="foot" style="margin: 30px 0px;">
+            <div>Best Regards</div>
+            <div style="font-weight: 600"><span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

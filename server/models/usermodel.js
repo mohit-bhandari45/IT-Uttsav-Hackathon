@@ -7,11 +7,11 @@ const UserModel = new mongoose.Schema({
         "phone": Number,
         "email": String
     },
-    "items": [{
+    "items": {
         "name": String,
         "types": String,
         "file": []
-    }],
+    },
     "location": {
         "coords": {
             "N": String,

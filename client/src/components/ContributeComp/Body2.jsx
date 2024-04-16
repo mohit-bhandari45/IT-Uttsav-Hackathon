@@ -31,11 +31,11 @@ const Body2 = (props) => {
         for (let fileInput of fileImages) {
             formData.append('files', fileInput);
         }
-        // let a = await fetch(uploadApi, {
-        //     method: 'POST',
-        //     body: formData
-        // })
-        // console.log(await a.text());
+        let a = await fetch(uploadApi, {
+            method: 'POST',
+            body: formData
+        })
+        console.log(await a.text());
         console.log("over")
         props.settrigger(3)
     }
@@ -71,30 +71,30 @@ const Body2 = (props) => {
             </div>
             <div style={{ height: height3 + "vh" }} className="card h-[71vh] w-[78%] bg-[#ffffff] rounded-md flex justify-center items-center relative">
                 <div className="left h-[65vh]  gap-14 w-[40%] bg-[#ECFFFD] flex flex-col justify-center items-start px-10">
-                    <div className="title text-3xl font-bold pl-2">
+                    <div className="title text-3xl font-bold pl-2 animate__animated animate__slideInLeft animate__fadeIn">
                         Contribute
                     </div>
                     <div className="sec1 flex justify-center items-center gap-5">
-                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full">1</div>
-                        <div className="para w-[200px] text-xl">Personal Details</div>
-                        <div className="line absolute top-[190px] w-[4px] h-[40px] left-[88px] bg-[#DDE6E5]"></div>
+                        <div className="flex animate__animated animate__fadeIn justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full">1</div>
+                        <div className="para w-[200px] text-xl animate__animated animate__slideInLeft animate__fadeIn">Personal Details</div>
+                        <div className="line animate__animated animate__fadeIn absolute top-[190px] w-[4px] h-[40px] left-[88px] bg-[#DDE6E5]"></div>
                     </div>
 
                     <div className="sec2 flex justify-center items-center gap-5">
-                        <div className="flex justify-center items-center font-bold num bg-[#37A896] p-2 w-[18%] rounded-full text-white">2</div>
-                        <div className="para w-[200px] text-xl">Items List</div>
-                        <div className="line absolute top-[286px] w-[4px] h-[40px] left-[88px] bg-[#37A896]"></div>
+                        <div className="flex animate__animated animate__fadeIn justify-center items-center font-bold num bg-[#37A896] p-2 w-[18%] rounded-full text-white">2</div>
+                        <div className="para w-[200px] text-xl animate__animated animate__slideInLeft animate__fadeIn">Items List</div>
+                        <div className="line animate__animated animate__fadeIn absolute top-[286px] w-[4px] h-[40px] left-[88px] bg-[#37A896]"></div>
                     </div>
 
                     <div className="sec3 flex justify-center items-center gap-5">
-                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full ">3</div>
-                        <div className="para w-[200px] text-xl">Pickup Location</div>
-                        <div className="line absolute top-[384px] w-[4px] h-[40px] left-[88px] bg-[#DDE6E5]"></div>
+                        <div className="flex animate__animated animate__fadeIn justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full ">3</div>
+                        <div className="para w-[200px] text-xl animate__animated animate__slideInLeft animate__fadeIn">Pickup Location</div>
+                        <div className="line animate__animated animate__fadeIn absolute top-[384px] w-[4px] h-[40px] left-[88px] bg-[#DDE6E5]"></div>
                     </div>
 
                     <div className="sec3 flex justify-center items-center gap-5">
-                        <div className="flex justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full ">4</div>
-                        <div className="para w-[200px] text-xl">Complete</div>
+                        <div className="flex animate__animated animate__fadeIn justify-center items-center font-bold num bg-[#DDE6E5] p-2 w-[18%] rounded-full ">4</div>
+                        <div className="para w-[200px] text-xl animate__animated animate__slideInLeft animate__fadeIn">Complete</div>
                     </div>
 
                 </div>
@@ -103,10 +103,10 @@ const Body2 = (props) => {
                     <form action="" className='flex flex-col justify-center gap-7'>
 
                         <div className="about flex flex-col gap-3">
-                            <div className="about1 text-xl">Wastes to Add(Optional)</div>
+                            <div className="about1 text-xl animate__animated animate__slideInUp animate__fadeIn">Wastes to Add(Optional)</div>
                             <div className="inputs flex flex-col gap-4">
-                                <input name="name" onChange={handlechange} className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Items Present(General)' />
-                                <input name="types" onChange={handlechange} className='px-3 py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Type of items' />
+                                <input  name="name" onChange={handlechange} className='px-3 animate__animated animate__slideInUp animate__fadeIn py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Items Present(General)' />
+                                <input name="types" onChange={handlechange} className='px-3 animate__animated animate__slideInUp animate__fadeIn py-3 border-[2px] border-[#37A896] w-[300px] rounded-md' type="text" placeholder='Type of items' />
                             </div>
 
                         </div>
@@ -121,13 +121,13 @@ const Body2 = (props) => {
 
                         <div className="image w-[330px] py-2 border-dashed border-[2px] border-[#37A896] rounded-md text-xl px-3 text-gray-400">
                             <div className="heading">
-                                <input ref={ref} onChange={handlechange2} name="file" className='files cursor-pointer block w-full text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />                            </div>
+                                <input ref={ref} onChange={handlechange2} name="file" className='files cursor-pointer block w-full text-lg text-gray-900 border animate__animated animate__fadeIn border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' type="file" placeholder='Attach Image' id="" />                            </div>
                         </div>
-                        <div className="buttonadd"><button className='text-white font-bold bg-[#37A896] rounded-md px-5 py-1 text-xl'>Upload</button></div>
+                        <div className="buttonadd"><button className='text-white animate__animated animate__slideInUp animate__fadeIn font-bold bg-[#37A896] rounded-md px-5 py-1 text-xl'>Upload</button></div>
 
                         <div className="line w-[30vw] h-[2px] bg-[#DDE6E5]"></div>
                         <div className="button">
-                            <button onClick={handleclick} className='ml-[360px] text-white font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Next</button>
+                            <button onClick={handleclick} className='ml-[360px] text-white animate__animated animate__slideInUp animate__fadeIn font-bold bg-[#37A896] rounded-md px-7 py-2 text-xl'>Next</button>
                         </div>
                     </form>
                 </div>

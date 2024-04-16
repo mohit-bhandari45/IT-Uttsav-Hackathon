@@ -10,12 +10,5 @@ export const DetailsContext = createContext({
             "name": "",
             "types": "",
             "file": []
-        },
-    "location": {
-        "coords": {
-            "N": "",
-            "E": ""
-        },
-        "address": ""
     }
 })

@@ -24,13 +24,6 @@ function App() {
       "name": "",
       "types": "",
       "file": []
-    },
-    "location": {
-      "coords": {
-        "N": "",
-        "E": ""
-      },
-      "address": ""
     }
   })
 
@@ -47,7 +40,7 @@ function App() {
           <Card2 />
           <Card3 />
           <Mid2 />
-          <Footer /></div> : <Contribution />}
+          <Footer /></div> : <Contribution con={con} setcon={setcon}/>}
       </DetailsContext.Provider>
     </>
   )
