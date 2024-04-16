@@ -13,10 +13,13 @@ const Body3 = (props) => {
 
     useEffect(() => {
         if (coordbool) {
-
-            // localStorage.setItem("lat",lat)
-            // localStorage.setItem("long",long)
-            // localStorage.setItem("address",address)
+            localStorage.setItem("lat",lat)
+            localStorage.setItem("long",long)
+            localStorage.setItem("address",address)
+            console.log(localStorage.getItem("lat"))
+            console.log(localStorage.getItem("long"))
+            console.log(localStorage.getItem("address"))
+            
             /*Not Working*/
             // value.setdetails({ ...value.details, ["location"]: { ...value.details.location, ["coords"]:{...value.details.location.coords,[a]:lat } }})
             // console.log("Updated address")
