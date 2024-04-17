@@ -97,7 +97,7 @@ export const userContribute = async (req, res) => {
                 console.log(error)
             }
         }
-        sendMail(transporter, mailOptions)
+        await sendMail(transporter, mailOptions)
         res.send("Completed user Registration")
     } catch (error) {
         console.log(error)

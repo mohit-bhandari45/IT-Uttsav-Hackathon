@@ -14,12 +14,12 @@ const Body1 = (props) => {
 
   const handleclick = (e) => {
     e.preventDefault()
-    $.LoadingOverlay("show");
+    // $.LoadingOverlay("show");
 
-    // Hide it after 3 seconds
-    setTimeout(function () {
-      $.LoadingOverlay("hide");
-    }, 3000);
+    // // Hide it after 3 seconds
+    // setTimeout(function () {
+    //   $.LoadingOverlay("hide");
+    // }, 3000);
     props.settrigger(2)
   }
 
