@@ -18,8 +18,8 @@ const Body3 = (props) => {
     // const [addressmain, setadressmain] = useState()
     const [main, setmain] = useState({
         "coords": {
-            "N": "20.3423535",
-            "E": "42.84785"
+            "N": "77.2373",
+            "E": "28.6542"
         },
         "address": "Khairigaon,Prem Nagar Dehradun"
     });
@@ -41,7 +41,7 @@ const Body3 = (props) => {
         navigator.geolocation.getCurrentPosition(async (position) => {
             setLong(position.coords.longitude)
             setLat(position.coords.latitude)
-            setaddress("Kharigaon,Premnagar")
+            setaddress("Kehri Gaon, Premnagar Dehradun")
             setdisabled(true)
             document.querySelector(".map").innerHTML = `<iframe width="250px" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=150px&amp;hl=en&amp;q=${position.coords.latitude},${position.coords.longitude}+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe>`
             setcoordbool(true)
@@ -50,10 +50,8 @@ const Body3 = (props) => {
 
     const handleClickMain = (e) => {
         e.preventDefault()
-        // setTimeout((e) => {
-            // console.log(value.details)
-            props.settrigger(4)
-        // }, 1000);
+        props.settrigger(4)
+
     }
 
 

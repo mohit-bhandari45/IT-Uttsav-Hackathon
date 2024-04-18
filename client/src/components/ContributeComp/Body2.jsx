@@ -36,7 +36,6 @@ const Body2 = (props) => {
             body: formData
         })
         console.log(await a.text());
-        console.log("over")
         props.settrigger(3)
     }
 

@@ -17,7 +17,6 @@ const Body4 = (props) => {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify(value.details)
         })

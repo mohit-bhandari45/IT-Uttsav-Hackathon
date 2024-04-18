@@ -16,7 +16,7 @@ export const uploadFile=(req,res)=>{
             }
         });
     });
-    res.send("Completed the user upload")
+    res.send("Files Uploaded successfully")
 }
 
 export const userContribute = async (req, res) => {
@@ -35,17 +35,17 @@ export const userContribute = async (req, res) => {
             port: 587, // Port for SMTP (usually 465)
             secure: false, // Usually true if connecting to port 465
             auth: {
-                user: "turnintech476@gmail.com", // Your email address
-                pass: "mhpv lsea wfql yhgs", // Password (for gmail, your app password)
+                user: "ecohaul8@gmail.com", // Your email address
+                pass: "mbox dxgw rktw hyen", // Password (for gmail, your app password)
             },
         });
         const mailOptions = {
             from: {
-                name: "Mohit",
-                address: "turnintech476@gmail.com",
+                name: "Ecohaul",
+                address: "ecohaul8@gmail.com",
             },
             to: email,
-            subject: "Regarding Registration",
+            subject: "Contribution to Ecohaul",
             html: `
             <div class="container" style="width: 90vw; margin: auto; font-family: Arial, Helvetica, sans-serif;">
             <div class="from" >From : <span style="color: rgb(59, 148, 186); font-weight: 600;">Ecohaul</span></div>

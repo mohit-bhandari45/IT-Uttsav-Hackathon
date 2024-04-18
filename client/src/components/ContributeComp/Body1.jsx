@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
 import { DetailsContext } from '../../context/context'
 import 'animate.css';
-import LoadingOverlay from "jquery"
 
 const Body1 = (props) => {
 
@@ -14,12 +13,6 @@ const Body1 = (props) => {
 
   const handleclick = (e) => {
     e.preventDefault()
-    // $.LoadingOverlay("show");
-
-    // // Hide it after 3 seconds
-    // setTimeout(function () {
-    //   $.LoadingOverlay("hide");
-    // }, 3000);
     props.settrigger(2)
   }
 
