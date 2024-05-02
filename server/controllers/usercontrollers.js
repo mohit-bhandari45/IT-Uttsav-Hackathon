@@ -35,14 +35,14 @@ export const userContribute = async (req, res) => {
             port: 587, // Port for SMTP (usually 465)
             secure: false, // Usually true if connecting to port 465
             auth: {
-                user: "ecohaul8@gmail.com", // Your email address
-                pass: "mbox dxgw rktw hyen", // Password (for gmail, your app password)
+                user: <process className="env EMAIL"></process>, // Your email address
+                pass: process.env.PASS, // Password (for gmail, your app password)
             },
         });
         const mailOptions = {
             from: {
                 name: "Ecohaul",
-                address: "ecohaul8@gmail.com",
+                address: <process className="env EMAIL"></process>,
             },
             to: email,
             subject: "Contribution to Ecohaul",
